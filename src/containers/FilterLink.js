@@ -1,6 +1,20 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { setVisibilityFilter } from '../actions';
-import Link from '../components/Link';
+import { NavLink } from 'react-router-dom§';
+
+const FilterLink = ({ filter, children }) => (
+  <NavLink
+    exact
+    to={filter === 'SHOW_ALL' ? '/' : `/${filter}`}
+    activeStyle={{
+      textDecoration: 'none',
+      color: 'black'
+    }}
+  >
+    {children}
+  </NavLink>
+)
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,6 +30,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const FilterContainer = connect(mapStateToProps, mapDispatchToProps)(Link)
+const FilterContainer = connect(mapStateToProps, mapDispatchToProps)(FilterLink)
 
 export default FilterContainer;
